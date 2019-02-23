@@ -1,0 +1,14 @@
+.Person {
+  width: 50%;
+  max-width: 600px;
+  margin: 15px auto;
+  border: 1px rgb(216, 216, 216) solid;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  padding: 16px;
+}
+
+.Person input:focus {
+  outline: none !important;
+  box-shadow: none;
+  border-color: aquamarine;
+}
