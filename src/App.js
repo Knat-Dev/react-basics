@@ -27,7 +27,6 @@ class App extends Component {
   togglePersonsHandler = () => {
     let isShown = this.state.isShown;
     this.setState({ isShown: !isShown });
-    console.log(styles.App);
   };
 
   deletePersonHandler = personIndex => {
@@ -37,7 +36,7 @@ class App extends Component {
   };
 
   render() {
-    let btnClasses = ["btn", "btn-outline-danger"].join(" ");
+    let btnClasses = ["btn", "btn-outline-success"].join(" ");
     let persons = null;
     if (this.state.isShown) {
       persons = (
@@ -55,7 +54,7 @@ class App extends Component {
           })}
         </div>
       );
-      btnClasses = ["btn", "btn-outline-success"].join(" ");
+      btnClasses = ["btn", "btn-outline-danger"].join(" ");
     }
 
     let classes = [];
