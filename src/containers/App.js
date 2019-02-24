@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 //import { render } from "react-dom";
-import Person from "./components/Persons/Person/Person";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 import styles from "./App.module.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
+
   state = {
     persons: [
-      { id: 1, name: "Max", age: 25 },
+      { id: 1, name: "Maxi", age: 25 },
       { id: 2, name: "Manu", age: 26 },
       { id: 3, name: "Stephan", age: 28 }
     ],
@@ -36,46 +47,29 @@ class App extends Component {
   };
 
   render() {
+    console.log("[App.js] render");
     let btnClasses = ["btn", "btn-outline-success"].join(" ");
     let persons = null;
     if (this.state.isShown) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                changed={event => this.nameChangedHandler(event, person.id)}
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-              />
-            );
-          })}
+          <Persons
+            persons={this.state.persons}
+            click={this.deletePersonHandler}
+            changed={this.nameChangedHandler}
+          />
         </div>
       );
       btnClasses = ["btn", "btn-outline-danger"].join(" ");
     }
 
-    let classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push("text-danger");
-    }
-    if (this.state.persons.length <= 1) classes.push("font-weight-bold");
-
     return (
       <div className={styles.App}>
-        <div className=" container text-center">
-          <h1 className="display-4 font-weight-light">Hi I'm a react app!</h1>
-          <p className={classes.join(" ")}>Wow! This is amazing!</p>
-          <button
-            className={btnClasses}
-            type="button"
-            onClick={this.togglePersonsHandler}
-          >
-            Click Me!
-          </button>
-        </div>
+        <Cockpit
+          btnClasses={btnClasses}
+          click={this.togglePersonsHandler}
+          persons={this.state.persons}
+        />
         {persons}
       </div>
     );
